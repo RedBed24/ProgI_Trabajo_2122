@@ -6,30 +6,30 @@ public class trabajo {
 
 	final static Scanner teclado = new Scanner(System.in);
 
-	static int leernumintervalo(int mínimo, int máximo) {
-		// Comprueba que el número introducido se encuentre en el intervalo [a,b]
+	static int leernumintervalo(int mÃ­nimo, int mÃ¡ximo) {
+		// Comprueba que el nÃºmero introducido se encuentre en el intervalo [a,b]
 		int n;
 		do {
 			n = teclado.nextInt();
-			if (n < mínimo || n > máximo)
-				System.out.println("Error el número debe ser mayor o igual a " + mínimo + " y menor o igual que " + máximo + ".");
-		} while (n < mínimo || n > máximo);
+			if (n < mÃ­nimo || n > mÃ¡ximo)
+				System.out.println("Error el nÃºmero debe ser mayor o igual a " + mÃ­nimo + " y menor o igual que " + mÃ¡ximo + ".");
+		} while (n < mÃ­nimo || n > mÃ¡ximo);
 		return n;
 	}
 
 	static boolean buscaraya(char[][] tablero) {
-		// Método para buscar el 5 en raya
+		// MÃ©todo para buscar el 5 en raya
 		int n = tablero.length;
 		boolean r = false;
 
-		for (int x = 0; x < n && !r; x++) // la condición de !raya es para que en cuanto se detecte que hay 5 en raya se salga y no tenga que hacer más iteraciones
+		for (int x = 0; x < n && !r; x++) // la condiciÃ³n de !raya es para que en cuanto se detecte que hay 5 en raya se salga y no tenga que hacer mÃ¡s iteraciones
 			for (int y = 0; y < n && !r; y++)
 				switch (tablero[x][y]) { // Recorre todo el tablero y si hay algo, empieza a revisar.
 				case 'x':
 				case 'o':
 					for (int i = 0; i <= 1 && !r; i++)
 						for (int j = -1; j <= 1 && !r; j++)// En una matriz 3*3, la casilla del centro (x, y), la de arriba a la izquierda (x-1, y-1), la de arriba centro (x, y-1)...
-							if (!(x + 4 * i < 0 || x + 4 * i >= n || y + 4 * j < 0 || y + 4 * j >= n) // Se encarga de que esté dentro de la matriz y no dé error indexOutOfBounds
+							if (!(x + 4 * i < 0 || x + 4 * i >= n || y + 4 * j < 0 || y + 4 * j >= n) // Se encarga de que estÃ© dentro de la matriz y no dÃ© error indexOutOfBounds
 							    && !(i == 0 && j == 0)) // Para no comprobar en la misma celda
 								if (tablero[x][y] == tablero[x + i]    [y + j]
 								 && tablero[x][y] == tablero[x + 2 * i][y + 2 * j]
@@ -40,18 +40,18 @@ public class trabajo {
 		return r;
 	}
 
-	static boolean ElecciónPrimerTurno() { // De forma aleatoria, se elige el primer turno.
+	static boolean ElecciÃ³nPrimerTurno() { // De forma aleatoria, se elige el primer turno.
 		boolean turnox;
-		int primerturno = (int) (Math.random() * 2); //TODO el int se puede hacer así y no usamos una variable double que guarda más información que un int, basicamente al poner el paréntesis le da prioridad a la operacion math*2, sin él hace int math y luego * 2
-		if (primerturno == 0) // Se toma la parte entera del número aleatorio
+		int primerturno = (int) (Math.random() * 2); //TODO el int se puede hacer asÃ­ y no usamos una variable double que guarda mÃ¡s informaciÃ³n que un int, basicamente al poner el parÃ©ntesis le da prioridad a la operacion math*2, sin Ã©l hace int math y luego * 2
+		if (primerturno == 0) // Se toma la parte entera del nÃºmero aleatorio
 			turnox = true;
 		else
 			turnox = false;
 		return turnox;
 	}
 
-	static void Turno(boolean turnox, String jugadorX, String jugadorO) { // Indicación del turno
-		if (turnox) //TODO no es necesario usar un _, la variable solo se va a leer, si se cambiase su valor sí tendriamos que cambiar el nombre
+	static void Turno(boolean turnox, String jugadorX, String jugadorO) { // IndicaciÃ³n del turno
+		if (turnox) //TODO no es necesario usar un _, la variable solo se va a leer, si se cambiase su valor sÃ­ tendriamos que cambiar el nombre
 			System.out.println("\nLe toca a " + jugadorX + ". Marca tu x.");
 		else
 			System.out.println("\nLe toca a " + jugadorO + ". Marca tu o.");
@@ -59,16 +59,16 @@ public class trabajo {
 
 	static void ResultadoPartida(boolean turnox, boolean raya, String jugadorX, String jugadorO) { // RESULTADO DE LA PARTIDA
 		if (!turnox && raya) //TODO lo mismo que en la anterior
-			System.out.println("\n¡5 en raya para " + jugadorX + "!");
+			System.out.println("\nÂ¡5 en raya para " + jugadorX + "!");
 		else if (raya)
-			System.out.println("\n¡5 en raya para " + jugadorO + "!");
+			System.out.println("\nÂ¡5 en raya para " + jugadorO + "!");
 		else
-			System.out.println("\n¡Se han acabado las fichas!");
+			System.out.println("\nÂ¡Se han acabado las fichas!");
 	}
 
 	static void display(char[][] tablero, String pX, String pO, boolean guardaentxt) throws IOException {
 		FileWriter fichero = new FileWriter("C:\\Users\\Public\\Tablero.txt");
-		// Creamos el documento y añadimos la ruta donde queremos guardarlo
+		// Creamos el documento y aÃ±adimos la ruta donde queremos guardarlo
 		int n = tablero.length;
 		
 		if (guardaentxt) {
@@ -79,7 +79,7 @@ public class trabajo {
 		}
 		
 		for (int i = -1; i < n; i++) {
-			String display = "\r\n"; //TODO este cambio ahorra unas líneas abajo, cuando se debe cambiar de linea, en vez de usar un println o guardar en el txt un \r\n, esta linea lo hace directamente
+			String display = "\r\n"; //TODO este cambio ahorra unas lÃ­neas abajo, cuando se debe cambiar de linea, en vez de usar un println o guardar en el txt un \r\n, esta linea lo hace directamente
 			for (int j = -1; j < n; j++) {
 				if (i == -1 && j == -1) {
 					display = display + "\n0  ";
@@ -119,22 +119,22 @@ public class trabajo {
 
 		boolean raya = false;
 
-		// Selección del tablero
-		System.out.print("Escribe el tamaño del tablero:");
+		// SelecciÃ³n del tablero
+		System.out.print("Escribe el tamaÃ±o del tablero:");
 		int N = leernumintervalo(5, 50);
 		int nfichas = N * N;
 		char[][] tablero = new char[N][N];
 
-		// Identificación de los jugadores
+		// IdentificaciÃ³n de los jugadores
 		System.out.println("Nombre del primer jugador: ");
 		String p1 = teclado.next();
 		System.out.println("Nombre del segundo jugador: ");
 		String p2 = teclado.next();
 
-		// Elección del primer turno
-		boolean turnox = ElecciónPrimerTurno();
+		// ElecciÃ³n del primer turno
+		boolean turnox = ElecciÃ³nPrimerTurno();
 
-		// Elección de las fichas
+		// ElecciÃ³n de las fichas
 		int XoO = (int) (Math.random() * 2); //TODO ya lo he explicado antes
 		String pX, pO;
 		if (XoO == 0) {
@@ -149,7 +149,7 @@ public class trabajo {
 		do {
 			// Dibujo del tablero
 			display(tablero, pX, pO, false);
-			// Indicación del turno
+			// IndicaciÃ³n del turno
 			Turno(turnox, pX, pO);
 
 			// Movimiento del jugador
@@ -160,10 +160,10 @@ public class trabajo {
 				System.out.print("Indica la fila:");
 				y = leernumintervalo(1, N) - 1;
 				if (tablero[x][y] == 'x' || tablero[x][y] == 'o')
-					System.out.println("Error, la celda está ocupada.");
+					System.out.println("Error, la celda estÃ¡ ocupada.");
 			} while (tablero[x][y] == 'x' || tablero[x][y] == 'o');
 
-			// Colocación de la ficha en el tablero
+			// ColocaciÃ³n de la ficha en el tablero
 			if (turnox)
 				tablero[x][y] = 'x';
 			else
