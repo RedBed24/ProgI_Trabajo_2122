@@ -1,0 +1,7 @@
+# Ignore Vim Backup files
+*~
+
+# Ignore compiled java code
+*.class
+/bin/
+
