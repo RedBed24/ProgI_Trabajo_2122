@@ -6,8 +6,12 @@ public class trabajo {
 
 	final static Scanner teclado = new Scanner(System.in);
 
+	/** Comprueba que el número introducido se encuentre en el intervalo [a,b] 
+	 * @param mínimo valor más pequeño del intervalo
+	 * @param maximo valor más grande del intervalo
+	 * @return Devuelve el número dentro del intervalo.
+	 */
 	static int leernumintervalo(int mínimo, int máximo) {
-		// Comprueba que el número introducido se encuentre en el intervalo [a,b]
 		int n;
 		do {
 			n = teclado.nextInt();
@@ -17,8 +21,11 @@ public class trabajo {
 		return n;
 	}
 
+	/** Método para buscar el 5 en raya
+	 * @param tablero El tablero como parámetro
+	 * @return Devuelve true si hay algún 5 en raya en el tablero o false si no lo hay.
+	 */
 	static boolean buscaraya(char[][] tablero) {
-		// Método para buscar el 5 en raya
 		int n = tablero.length;
 		boolean r = false;
 
@@ -40,25 +47,40 @@ public class trabajo {
 		return r;
 	}
 
-	static boolean ElecciónPrimerTurno() { // De forma aleatoria, se elige el primer turno.
-		boolean turnox;
-		int primerturno = (int) (Math.random() * 2); //TODO el int se puede hacer así y no usamos una variable double que guarda más información que un int, basicamente al poner el paréntesis le da prioridad a la operacion math*2, sin él hace int math y luego * 2
+	/** De forma aleatoria, se elige el primer turno.
+	 * @return Devolverá un valor booleano que lo determinará.
+	 */
+	static boolean ElecciónPrimerTurno() { 
+		boolean turno;
+		int primerturno = (int) (Math.random() * 2); 
 		if (primerturno == 0) // Se toma la parte entera del número aleatorio
-			turnox = true;
+			turno = true;
 		else
-			turnox = false;
-		return turnox;
+			turno = false;
+		return turno;
 	}
 
-	static void Turno(boolean turnox, String jugadorX, String jugadorO) { // Indicación del turno
-		if (turnox) //TODO no es necesario usar un _, la variable solo se va a leer, si se cambiase su valor sí tendriamos que cambiar el nombre
+	/** Indicación del turno
+	 * @param turnox indica el turno de las X.
+	 * @param jugadorX el que usa las X.
+	 * @param jugadorO el que usa los O.
+	 */
+	static void Turno(boolean turnox, String jugadorX, String jugadorO) { 
+		System.out.println();
+		if (turnox) 
 			System.out.println("\nLe toca a " + jugadorX + ". Marca tu x.");
 		else
 			System.out.println("\nLe toca a " + jugadorO + ". Marca tu o.");
 	}
 
-	static void ResultadoPartida(boolean turnox, boolean raya, String jugadorX, String jugadorO) { // RESULTADO DE LA PARTIDA
-		if (!turnox && raya) //TODO lo mismo que en la anterior
+	/** RESULTADO DE LA PARTIDA 
+	 * @param turnox la variable que indica el turno.
+	 * @param raya la existencia de raya (true) o no (false).
+	 * @param jugadorX usa las X.
+	 * @param jugadorO usa los O.
+	 */
+	static void ResultadoPartida(boolean turnox, boolean raya, String jugadorX, String jugadorO) {
+		if (!turnox && raya)
 			System.out.println("\n¡5 en raya para " + jugadorX + "!");
 		else if (raya)
 			System.out.println("\n¡5 en raya para " + jugadorO + "!");
@@ -66,9 +88,14 @@ public class trabajo {
 			System.out.println("\n¡Se han acabado las fichas!");
 	}
 
+	/** Creamos el documento y a?adimos la ruta donde queremos guardarlo
+	 * @param tablero El tablero.
+	 * @param pX (jugadorX).
+	 * @param pO (jugadorO).
+	 * @param guardaentxt, valor booleano que dar? la orden de registrar en un documento txt el tablero o no.
+	 */
 	static void display(char[][] tablero, String pX, String pO, boolean guardaentxt) throws IOException {
-		FileWriter fichero = new FileWriter("C:\\Users\\Public\\Tablero.txt");
-		// Creamos el documento y añadimos la ruta donde queremos guardarlo
+		FileWriter fichero = new FileWriter("Tablero.txt");
 		int n = tablero.length;
 		
 		if (guardaentxt) {
@@ -77,9 +104,9 @@ public class trabajo {
 			fichero.write("Jugador X: " + pX + "  |  Jugador O: " + pO);
 			fichero.write("\r\n");
 		}
-		
+
 		for (int i = -1; i < n; i++) {
-			String display = "\r\n"; //TODO este cambio ahorra unas líneas abajo, cuando se debe cambiar de linea, en vez de usar un println o guardar en el txt un \r\n, esta linea lo hace directamente
+			String display = "\r\n"; 
 			for (int j = -1; j < n; j++) {
 				if (i == -1 && j == -1) {
 					display = display + "\n0  ";
@@ -135,7 +162,7 @@ public class trabajo {
 		boolean turnox = ElecciónPrimerTurno();
 
 		// Elección de las fichas
-		int XoO = (int) (Math.random() * 2); //TODO ya lo he explicado antes
+		int XoO = (int) (Math.random() * 2); 
 		String pX, pO;
 		if (XoO == 0) {
 			pX = p1;
@@ -180,7 +207,7 @@ public class trabajo {
 		// ************************Final del juego******************************
 
 		display(tablero, pX, pO, true);
-
+		System.out.println();
 		// RESULTADO DE LA PARTIDA
 		ResultadoPartida(turnox, raya, pX, pO);
 
